@@ -23,15 +23,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
 </head>
-<<<<<<< HEAD
-<body>
-=======
-
-<body style="background-color: red;">
-
 <body>
 
->>>>>>> 234fef0eb8dc6368acaa902a096b613848595c61
 <header id="header-wrap">
    <?php require "header.php"; ?>
     <div id="hero-area" class="hero-area-bg particles_js">
