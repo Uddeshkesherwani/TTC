@@ -9,6 +9,18 @@ else if($_SESSION['type'] == 'developer'){
     window.location = '../developer/'; 
     </script>";
 }
+
+include "../connection.php";
+$query1 = mysqli_query($con, "select fname, lname from user_account where type='".$_SESSION['type']."' and mobile='".$_SESSION['user']."'");
+$row = mysqli_fetch_array($query1);
+
+$rx = $row['fname']." ".$row['lname'];
+$username = "";
+for($i=0;$i<12;$i++){
+    $username .= $rx[$i];
+}
+
+mysqli_close($con);
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,7 +64,7 @@ else if($_SESSION['type'] == 'developer'){
         <div class="container-fluid">
 
             <div class="navbar-left">
-                        <div class="navbar-btn">
+                <div class="navbar-btn">
                     <a href="index.php"><img src="../assets/image/ticketing_TOOL_LOGO.png" alt="Ticketing Tool" class="img-fluid logo" style="max-height:100px; max-width:100px;"></a>
                     <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
                 </div>
@@ -185,7 +197,7 @@ else if($_SESSION['type'] == 'developer'){
                 </div>
                 <div class="dropdown">
                     <span>Welcome,</span>
-                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Satyam Agrawal</strong></a>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?php echo $username; ?></strong></a>
                     <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
                         <li><a href="?profile"><i class="icon-user"></i>My Profile</a></li>
                         <li><a href="?message"><i class="icon-envelope-open"></i>Messages</a></li>
