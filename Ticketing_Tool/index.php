@@ -1,5 +1,3 @@
-Satyam
-harshil
 <!DOCTYPE html>
 <html lang="en">
 
