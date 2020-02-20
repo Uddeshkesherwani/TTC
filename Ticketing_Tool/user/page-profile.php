@@ -150,24 +150,24 @@ mysqli_close($con);
                             <h2>Account Data</h2>
                         </div>
                         <div class="body">
-                            <div class="row clearfix">
-                                                               
+                            <form method="post">
+                            <div class="row clearfix">                       
                                 <div class="col-lg-12 col-md-12">
                                     <hr>
                                     <h6>Change Password</h6>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Current Password">
+                                        <input type="password" class="form-control" placeholder="Current Password" name="cpass" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="New Password">
+                                        <input type="password" class="form-control" placeholder="New Password" name="npass" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Confirm New Password">
+                                        <input type="password" class="form-control" placeholder="Confirm New Password" name="rpass" required>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-round btn-primary">Update</button> &nbsp;&nbsp;
-                            <button type="button" class="btn btn-round btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-round btn-primary" name="myform2">Update</button> &nbsp;&nbsp;
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -183,5 +183,27 @@ if(mysqli_query($con, "UPDATE `user_account` SET `fname`='".$_POST['fname']."',`
     echo "<script>window.location = 'index.php?profile'; </script>";
 
 mysqli_close($con);
+}
+
+if(isset($_POST['myform2'])){
+     
+    if($_POST['npass'] == $_POST['rpass']){
+        include "../connection.php";
+        $password1 = md5(md5($_POST['cpass']));
+        $password = md5(md5($_POST['npass']));
+        $req = "UPDATE `user_account` SET password='".$password."' where mobile='".$_SESSION['user']."' and type='".$_SESSION['type']."' and password='".$password1."' ";
+        
+        if ($con->query($req) === TRUE) {
+            echo "<script>alert('Record updated successfully');</script>";
+            echo "<script>window.location = 'index.php?profile'; </script>";
+        }
+        else{
+            echo "<script>alert('Something went wrong!!!');</script>";
+        }
+        mysqli_close($con);
+        
+    }else{
+        echo "<script>alert('Invalid New Password = Confirm Password');</script>";
+    }
 }
 ?>

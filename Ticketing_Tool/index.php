@@ -24,7 +24,6 @@
 
 </head>
 <body>
-
 <header id="header-wrap">
    <?php require "header.php"; ?>
     <div id="hero-area" class="hero-area-bg particles_js">
@@ -41,11 +40,13 @@
                                 echo "<a href='register.php' class='btn btn-common'>Registration</a>
                                 <a href='login.php' class='btn btn-common blush'>Login</a>";
                             }else{
-                                if($_SESSION['type'] == 'user'){
-                                    echo "<a href='user/' class='btn btn-common blush'>Dashboard</a>";
-                                }
-                                if($_SESSION['type'] == 'developer'){
-                                    echo "<a href='developer' class='btn btn-common blush'>Dashboard</a>";
+                                if(isset($_SESSION['type'])){
+                                    if($_SESSION['type'] == 'user'){
+                                        echo "<a href='user/' class='btn btn-common blush'>Dashboard</a>";
+                                    }
+                                    if($_SESSION['type'] == 'developer'){
+                                        echo "<a href='developer' class='btn btn-common blush'>Dashboard</a>";
+                                    }
                                 }
                             }
                             ?>

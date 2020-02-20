@@ -46,7 +46,6 @@ else if($_SESSION['type'] == 'user'){
                 <div class="bar5"></div>
             </div>
         </div>
-
         <div id="wrapper">
             <nav class="navbar top-navbar">
                 <div class="container-fluid">
@@ -203,6 +202,10 @@ else if($_SESSION['type'] == 'user'){
                         <ul id="main-menu" class="metismenu">
                             
                             <li>
+                                <a href="../index.php" class="a"><i class="icon-pie-chart"></i><span>Index</span></a>
+                            </li>
+                            
+                            <li>
                                 <a href="index.php" class="a"><i class="icon-pie-chart"></i><span>Dashboard</span></a>
                             </li>
                     
@@ -285,7 +288,6 @@ else if($_SESSION['type'] == 'user'){
         </div>
         
     </body>
-            
 
     <script src="../html/assets/bundles/libscripts.bundle.js"></script>
     <script src="../html/assets/bundles/vendorscripts.bundle.js"></script>
@@ -293,6 +295,5 @@ else if($_SESSION['type'] == 'user'){
     <script src="../html/assets/bundles/mainscripts.bundle.js"></script>
     <script src="../assets/bundles/knob.bundle.js"></script>
     <script src="../assets/js/index6.js"></script>
-        
     <script src="../assets/js/index6.js"></script>
 </html>
