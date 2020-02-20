@@ -24,7 +24,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
 </head>
-<body style="background-color: blue;">
+<body style="background-color: red;">
 <header id="header-wrap">
    <?php require "header.php"; ?>
     <div id="hero-area" class="hero-area-bg particles_js">
