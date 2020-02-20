@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 Satyam
+=======
+<<<<<<< HEAD
+harshil
+=======
+Satyam Agrawal
+>>>>>>> 2cc12002f27e396bd7bfc9f0e8dac087ad7f8481
+>>>>>>> dca17e7fc7f015f3aaa8e65dada12282929b25dc
 <!DOCTYPE html>
 <html lang="en">
 
