@@ -2,12 +2,32 @@
     <div class="container mt-5">
         <div class="auth-main particles_js">
             <div class="auth_div vivify popIn">
-
-        <div class="card" style="margin-top:-200px; z-index:-1;">
+                
+        <div class="card" style="margin-top:-100px;">
             <div class="body">
                 <p class="lead">Create an Account</p>
                 <form class="form-auth-small m-t-20" method="post" autocomplete="off">
                     <div class="form-group">
+                        <select name="team" class="form-control">
+                            <option value="">---Select Team---</option>
+                            <option value="Backend"> Backend</option>
+                            <option value="Frontend"> Frontend</option>
+        	
+                            <option value="Digital Marketing"> Digital Marketing</option>
+                            <option value="Planning">Planning </option>
+                            <option value="Python">Python</option>
+                            <option value="Andriod Developement"> Andriod Developement</option>
+                            <option value="Program Manager"> Program Manager</option>
+                            <option value="Leadership team">Leadership team </option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                         <select name="post" class="form-control">
+                            <option value="Member">Member</option>
+                            <option value="Leader">Leader</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
                         <label for="signin-email" class="control-label sr-only">Full Name</label>
                         <input type="text" class="form-control round" id="signin-email" placeholder="First Name" name="fname">
                     </div>
@@ -67,8 +87,8 @@ if(isset($_POST['create'])){
     
     
     if($i == 0){
-        if($row = mysqli_query($con, "insert into user_account (`type`, `fname`,  `email`, `mobile`, `website`,  `password`) values('developer','$fname','$email1','$mobile1','$weblink','$password')")or die(mysql_error())){
-
+        if($row = mysqli_query($con, "insert into user_account (`type`, `fname`, post, `email`, `mobile`, `website`,  `password`) values('developer','$fname','".$_POST['post']."','$email1','$mobile1','$weblink','$password')")or die(mysql_error())){
+            mysqli_query($con, "INSERT INTO `developer_profile`(`user_id`, `Team`, `Post`) VALUES ('$mobile1','".$_POST['team']."','".$_POST['post']."')");
             echo "<script> alert('Sucessfully register'); </script>";
       
         }else{
