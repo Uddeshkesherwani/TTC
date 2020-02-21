@@ -40,7 +40,7 @@
             <div class="col-md-6 col-lg-8 col-sm-12">
                 <div class="contact-block">
                     <h2>Contact Form</h2>
-                    <form id="contactForm">
+<!--                    <form id="contactForm"  method="post">-->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -70,16 +70,45 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="submit-button">
-                                    <button class="btn btn-common blush" id="form-submit" type="submit">Send Message</button>
-                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <button class="btn btn-common blush" id="form-submit" type="submit" onclick="mYForm()">Send Message</button>
+                                    <div id="msgSubmit" class="h3 text-center"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    
+
+<script>
+    function mYForm(){
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var msg_subject = document.getElementById('msg_subject').value;
+        var message = document.getElementById('message').value;
+        
+        if(name != '' && email != '' && msg_subject != '' && message != ''){
+        $.ajax({
+            url:"insert.php",
+            type:"post",
+            data:{
+                name : name,
+                email :email,
+                msg_subject :msg_subject,
+                message : message,
+            },
+            success:function(data){
+                $('#msgSubmit').text(data);
+                $('#name').val('');
+                $('#email').val('');
+                $('#msg_subject').val('');
+                $('#message').val('');
+            }
+        });
+    }else{
+        $('#msgSubmit').text("Please Fill all the field");
+    }
+    }
+</script>
