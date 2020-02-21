@@ -30,24 +30,56 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="">INC0000785</a></td>
-                                            <td>Uddesh kesherwai</td>
-                                            <td>p1</td>
-                                            <td>Computer</td>
-                                            <td>14/02/2020</td>
-                                            
-                                            <td>
-                                                Backend
-                                            </td>
-                                            <td>
-                                                Uddesh
-                                            </td>
-                                            
-                                            <td align="center"><button style="background-color:grey; color:white; border:1px; padding:10px; font-weight:bolder;">Cancel Task</button></td>
-                                        </tr>
+                                    <tbody id="List">
+                                          <?php 
+                                         
+                                        include "../connection.php";
+                                        $data = "";
+                                        $row = $con->query("select * from incident where assign_person = ''");
                                         
+                                        while ($obj = $row -> fetch_object()) {
+    
+                                            $data .= " <tr>
+                                            <td><a href='?xy&id=$obj->id'>INC000$obj->id</a></td>
+                                            <td>$obj->contact_name</td>
+                                            <td>$obj->priority</td>
+                                            <td>$obj->category</td>
+                                            <td>$obj->date</td>
+                                            <td>$obj->assign_grp</td>
+                                            <td>$obj->assign_person</td>
+                                           
+                                            <td><button style='background-color:grey; color:white; border:1px; padding:10px; font-weight:bolder;' onclick=canCels('a','$obj->id')>Cancel Task</button></td>
+                                            </tr>";
+        
+                                        }
+                                        
+                                        mysqli_close($con);
+                                        echo $data;
+                                        ?>
+                                        
+                                        <?php 
+                                        
+                                        include "../connection.php";
+                                        $data = "";
+                                        $row = $con->query("select * from request where assign_name = ''");
+                                        while ($obj = $row -> fetch_object()) {
+    
+                                            $data .= " <tr>
+                                            <td><a href='?xy&id=$obj->id'>REQ000$obj->id</a></td>
+                                            <td>$obj->contact_name</td>
+                                            <td>$obj->priority</td>
+                                            <td>$obj->category</td>
+                                            <td>$obj->date</td>
+                                            <td>$obj->assign_grp</td>
+                                            <td>$obj->assign_name</td>
+                                            
+                                            <td><button style='background-color:grey; color:white; border:1px; padding:10px; font-weight:bolder;' onclick=canCels('b','$obj->id')>Cancel Task</button></td></tr>";
+        
+                                        }
+                                        
+                                        mysqli_close($con);
+                                        echo $data;
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>  
@@ -57,3 +89,32 @@
             </div>
     </div>
 </div>
+
+<script>
+    function canCels(a,b){
+        $.ajax({
+            url:"plan_canecl_backend.php",
+            type:"post",
+            data:{
+                name : "Ok",
+                t : a,
+                id : b
+            },
+            success:function(){
+                update_List();
+            }
+        });
+    }
+    function update_List(){
+        $.ajax({
+            url:"plan_canecl_backend.php",
+            type:"post",
+            data:{
+                name2 : "Ok",
+            },
+            success:function(data){
+                $('#List').html(data);
+            }
+        });
+    }
+</script>

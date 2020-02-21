@@ -235,24 +235,34 @@ else if($_SESSION['type'] == 'user'){
                                     <li><a href="?my_c_task">My Completed Task</a></li>
                                 </ul>
                             </li>
-                    
-                            <li>
-                                <a href="" class="has-arrow"><i class="icon-pencil"></i><span>Planning</span></a>
+                            <?php
+                            include "../connection.php";
+                            
+                            $row = $con->query("SELECT COUNT(*) as count from user_account LEFT JOIN developer_profile on user_account.mobile = developer_profile.user_id WHERE developer_profile.Post = 'Leader' and user_account.mobile='".$_SESSION['user']."' and user_account.type='developer'");
+                            $data = $row->fetch_object();
+                            
+                            if($data->count == 1){
+                                echo "<li>
+                                <a href='' class='has-arrow'><i class='icon-pencil'></i><span>Planning</span></a>
                                 <ul>
-                                    <li><a href="?assign_plan">Assign work</a></li>
-<!--                                    <li><a href="?team_work">Create a team task</a></li>-->
-                                    <li><a href="?cancel_task">Cancel any task</a></li>
+                                    <li><a href='?assign_plan'>Assign work</a></li>
+                                    <li><a href='?cancel_task'>Cancel any task</a></li>
                                 </ul>
                             </li>
                     
                             <li>
-                                <a href="" class="has-arrow"><i class="icon-pencil"></i><span>Configure</span></a>
+                                <a href='' class='has-arrow'><i class='icon-pencil'></i><span>Configure</span></a>
                                 <ul>
-                                    <li><a href="?create_profile">Create Developer Profile</a></li>
-                                    <li><a href="?block_developer">Block Developer Profile</a></li>
-                                    <li><a href="?unblock_developer">Unblock Developer Profile</a></li>
+                                    <li><a href='?create_profile'>Create Developer Profile</a></li>
+                                    <li><a href='?block_developer'>Block Developer Profile</a></li>
+                                    <li><a href='?unblock_developer'>Unblock Developer Profile</a></li>
                                 </ul>
-                            </li>
+                            </li>";
+                            }
+                            
+                            mysqli_close($con);
+                            ?>
+                            
                     
                         </ul>
                     </nav>     
